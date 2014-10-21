@@ -9,6 +9,7 @@ public class IntentReaderActivity extends Activity {
 
 	public static final String TEXT_KEY = "TEXT";
 	public static final String TRANSFORM_KEY = "TRANSFORM";
+	public static final String DEFAULT = "this is a default message";
 
 	public static final int NORMAL = 1;
 	public static final int REVERSE = 2;
@@ -25,7 +26,19 @@ public class IntentReaderActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_intent_reader);
+		Intent intent = getIntent();
+		this.mode = intent.getIntExtra(TRANSFORM_KEY, NORMAL);
+		this.text = transformText(intent.getStringExtra(TEXT_KEY));
+		if (text == null){
+			text = DEFAULT;
+		}
+		getView().setText(text);
 	}
+	
+	public TextView getView(){
+		return (TextView)findViewById(R.id.intentText);
+	}
+	
 	
 	public String transformText(String text) {
 		switch (mode) {
@@ -40,6 +53,7 @@ public class IntentReaderActivity extends Activity {
 			case DOUBLE:
 				return text + text;
 		}
+		
 		return text;
 	}
 }

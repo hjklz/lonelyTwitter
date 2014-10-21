@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class LonelyTwitterActivity extends Activity {
 
@@ -45,6 +46,7 @@ public class LonelyTwitterActivity extends Activity {
 				saveInFile(tweet);
 				tweets.add(tweet);
 				adapter.notifyDataSetChanged();
+				bodyText.setText("");
 			}
 		});
 	}
@@ -59,6 +61,10 @@ public class LonelyTwitterActivity extends Activity {
 		oldTweetsList.setAdapter(adapter);
 	}
 
+	public ListView getListView(){
+		return (ListView)findViewById(R.id.oldTweetsList);
+	}
+	
 	private ArrayList<NormalTweetModel> loadFromFile() {
 		ArrayList<NormalTweetModel> tweets = new ArrayList<NormalTweetModel>();
 		try {
